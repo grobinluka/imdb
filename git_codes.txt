@@ -1,0 +1,22 @@
+cd ..
+cd ..
+cd d:
+
+cd xampp/htdocs/imdb
+
+git status
+
+git init
+
+git add .
+
+git config --global user.email "grobinluka@gmail.com"
+
+git config --global user.name "grobinluka"
+
+git commit -m "First Commit"
+
+git remote add origin https://github.com/grobinluka/imdb.git
+
+git push -u origin master
+
