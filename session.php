@@ -16,7 +16,7 @@ $allowed = [
 
 //če uporabnik ni prijavljen in ne obiskuje dovoljenih strani - ga preusmeri na prijavo
 if(!isset($_SESSION['user_id'])&& (!in_array($_SERVER['REQUEST_URI'], $allowed))){
-    header("Location: login.php"); die();đ
+    header("Location: login.php"); die();
 }
 
 ?>
