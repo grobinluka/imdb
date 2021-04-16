@@ -16,8 +16,8 @@
 
 <form action="genre_update.php" method="post">
     <input type="hidden" name="id" value="<?php echo $genre['genre_id']; ?>" />
-    <input class="form-control" value="<?php echo $genre['genre']; ?>" type="text" name="genre" placeholder="Vnesi ime žanra" required="required" /><br />
-    <input class="form-control" value="<?php echo $genre['short']; ?>"type="text" name="short" placeholder="Vnesi kratico žanra" /><br />
+    <input class="form-control" value="<?php echo $genre['genre']; ?>" type="text" name="genre" required="required" /><br />
+    <input class="form-control" value="<?php echo $genre['short']; ?>" type="text" name="short" /><br />
 
     <input type="submit" class="btn btn-primary" value="Shrani"/>
 </form>

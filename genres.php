@@ -17,7 +17,7 @@
         echo '<span>'.$row['short'].'</span>';
         echo '<br/>';
         echo '<a href="genre_edit.php?id='.$row['genre_id'].'">Uredi</a> ';
-        echo '<a href="genre_delete.php?id='.$row['genre_id'].'" onclick="return confirm(\'Prepričani?\')">Izbrisi</a>';
+        echo '<a href="genre_delete.php?id='.$row['genre_id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
         echo '<br/>';
         echo '</div>';
     }
