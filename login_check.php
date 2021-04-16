@@ -19,7 +19,7 @@ if(!empty($email) && !empty($pass)){
         
         //preverim ali se gesli ujemata
         if(password_verify($pass, $user['pass'])){
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['last_name'] = $user['last_name'];
             $_SESSION['admin'] = $user['admin'];
