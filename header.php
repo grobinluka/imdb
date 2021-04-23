@@ -44,6 +44,7 @@
         <nav class="nav d-flex">
           <a class="p-2 text-muted" href="genres.php">Žanri</a>
           <a class="p-2 text-muted" href="actors.php">Igralci</a>
+          <a class="p-2 text-muted" href="movies.php">Filmi</a>
         </nav>
       </div>
 
