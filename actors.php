@@ -12,7 +12,9 @@
 
     while($row = $stmt->fetch()){
         echo '<div class="actor">';
-        echo $row['first_name'].' '.$row['last_name'];
+        echo '<a href="actor.php?id='.$row['actor_id'].'">';
+            echo $row['first_name'].' '.$row['last_name'];
+        echo '</a>';
         echo '<br/>';
         echo '<span>'.$row['nickname'].'</span>';
         echo '<br/>';
