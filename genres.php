@@ -11,7 +11,7 @@
     $stmt->execute();
 
     while($row = $stmt->fetch()){
-        echo '<div class="genre">';
+        echo '<div class="view-borders">';
         echo $row['genre'];
         echo '<br/>';
         echo '<span>'.$row['short'].'</span>';

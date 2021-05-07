@@ -11,7 +11,7 @@
     $stmt->execute();
 
     while($row = $stmt->fetch()){
-        echo '<div class="actor">';
+        echo '<div class="view-borders">';
         echo '<a href="actor.php?id='.$row['actor_id'].'">';
             echo $row['first_name'].' '.$row['last_name'];
         echo '</a>';

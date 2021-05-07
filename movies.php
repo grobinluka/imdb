@@ -12,7 +12,7 @@
     $stmt->execute();
 
     while($row = $stmt->fetch()){
-        echo '<div class="movies">';
+        echo '<div class="view-borders">';
         echo '<a href="movie.php?id='.$row['movie_id'].'">';
             echo $row['title'];
         echo '</a>';

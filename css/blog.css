@@ -132,8 +132,68 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.genre{
+
+
+/**** MY CODE ****/
+
+.view-borders{
   border: 2px solid lightgray;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0px 10px 0px;
+}
+
+.igralci, .filmi, .komentarji{
+  border: 2px solid lightgray;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.filmi{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:15px;
+}
+
+.filmi .film-slike img{
+  width:100%
+}
+
+.film-podatki .naslov{
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.film-podatki .opis{
+  font-size: 0.8em;
+}
+
+.igralci{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.igralci .igralec img{
+  width: 50%;
+}
+
+.igralci .igralec-podatki{
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.komentarji .komentarji-prikaz{
+  margin-top: 50px;
+}
+
+.komentarji .komentarji-prikaz .komentar .komentar-oseba{
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.komentarji .komentarji-prikaz .komentar .komentar-datum{
+  font-size: 0.7em;
+}
+
+.komentarji .komentarji-prikaz .komentar .komentar-opis{
+  font-size: 0.8em;
 }
