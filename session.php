@@ -61,5 +61,4 @@ function getGenres($movie_id){
     return $return;
 }
 
-
 ?>

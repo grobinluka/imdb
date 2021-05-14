@@ -155,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .filmi .film-slike img{
-  width:100%
+  width:100%;
 }
 
 .film-podatki .naslov{
@@ -195,5 +195,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .komentarji .komentarji-prikaz .komentar .komentar-opis{
+  font-size: 0.8em;
+}
+
+.post .post-heading {
+  height: 95px;
+  padding: 20px 15px;
+}
+
+.post .post-heading .avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-right: 15px;
+}
+
+.post .post-image .image {
+  width: 100%;
+  height: auto;
+}
+
+.post .post-description {
+  padding: 15px;
+}
+
+.card{
+  margin-bottom:20px;
+}
+
+.date-font-size{
   font-size: 0.8em;
 }
