@@ -44,55 +44,32 @@
 <div class="igralci">
     <div class="igralec">
         <table>
+            <?php
+                $query = "SELECT a.actor_id, a.first_name, a.last_name, r.role FROM roles r INNER JOIN actors a ON a.actor_id = r.actor_id WHERE (r.movie_id = ?)";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$id]);
+
+                while($row = $stmt->fetch()){
+
+            ?>
             <tr>
-                <td><img src="https://res.cloudinary.com/du1efakdk/image/upload/c_fill,f_auto,h_414,q_auto,w_280/v1617012871/kftv/nig1dtun8ug4gsx1td4n.jpg"
-                        alt="igralec" /></td>
+                <td><img src="<?php echo getActorAvatar($row['actor_id']); ?>" alt="igralec" /></td>
                 <td>
-                    <div class="igralec-podatki">Wan Diesel</div>
+                    <div class="igralec-podatki"><?php echo $row['first_name'].' '.$row['last_name']; ?></div>
                 </td>
                 <td>
                     <div class="igralec-film-podatki">
-                        <div>Jože Novak</div>
+                        <div><?php echo $row['role']; ?></div>
+                    </div>
                 </td>
             </tr>
-
-            <tr>
-                <td><img src="https://res.cloudinary.com/du1efakdk/image/upload/c_fill,f_auto,h_414,q_auto,w_280/v1617012871/kftv/nig1dtun8ug4gsx1td4n.jpg"
-                        alt="igralec" /></td>
-                <td>
-                    <div class="igralec-podatki">Wan Diesel</div>
-                </td>
-                <td>
-                    <div class="igralec-film-podatki">Jože Novak</div>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://res.cloudinary.com/du1efakdk/image/upload/c_fill,f_auto,h_414,q_auto,w_280/v1617012871/kftv/nig1dtun8ug4gsx1td4n.jpg"
-                        alt="igralec" /></td>
-                <td>
-                    <div class="igralec-podatki">Wan Diesel</div>
-                </td>
-                <td>
-                    <div class="igralec-film-podatki">Jože Novak</div>
-                </td>
-            </tr>
-
-            <tr>
-                <td><img src="https://res.cloudinary.com/du1efakdk/image/upload/c_fill,f_auto,h_414,q_auto,w_280/v1617012871/kftv/nig1dtun8ug4gsx1td4n.jpg"
-                        alt="igralec" /></td>
-                <td>
-                    <div class="igralec-podatki">Wan Diesel</div>
-                </td>
-                <td>
-                    <div class="igralec-film-podatki">Jože Novak</div>
-                </td>
-            </tr>
-
-            <tr>
+            <?php 
+                }
+            ?>
+            <!--<tr>
                 <br />
                 <td><a href="#">Prikaži vse igralce</a></td>
-            </tr>
+            </tr>-->
         </table>
     </div>
 </div>

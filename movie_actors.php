@@ -12,9 +12,15 @@ $query = "SELECT * FROM roles WHERE movie_id = ?";
 $stmt = $pdo->prepare($query);
 $stmt->execute([$movie_id]);
 
+$roles = array();
+
 $actors = array();
 while($row = $stmt->fetch()){
-    $actors[] = $row['actor_id'];
+    $actor_id = $row['actor_id'];
+    $actors[] = $actor_id;
+
+    //za igralca si zapomnim vlogo
+    $roles[$actor_id] = $row['role'];
 }
 
 
@@ -32,7 +38,7 @@ while($row = $stmt->fetch()){
         while($row = $stmt->fetch()){
             if(in_array($row['actor_id'], $actors)){
                 echo '<input type="checkbox" checked="checked" name="actors[]" value="'.$row['actor_id'].'"/> '.$row['first_name'].' '.$row['last_name'].'<br />';
-                echo '<input type="text" value="Vnesi ime vloge" name="role['.$row['actor_id'].']" class="form-control" /><br />';
+                echo '<input type="text" value="'.$roles[$row['actor_id']].'" name="role['.$row['actor_id'].']" class="form-control" /><br />';
             }
             else{
                 echo '<input type="checkbox" name="actors[]" value="'.$row['actor_id'].'"/> '.$row['first_name'].' '.$row['last_name'].'<br />';
