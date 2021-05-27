@@ -1,5 +1,8 @@
 <?php
     include_once "session.php";
+
+    adminOnly();
+
     include_once "db.php";
 
     $genre = $_POST['genre'];

@@ -18,13 +18,21 @@
         echo '<br/>';
         echo '<span>'.$row['nickname'].'</span>';
         echo '<br/>';
-        echo '<a href="actor_edit.php?id='.$row['actor_id'].'">Uredi</a> ';
-        echo '<a href="actor_delete.php?id='.$row['actor_id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
-        echo '<br/>';
+        if(isAdmin()){
+            echo '<a href="actor_edit.php?id='.$row['actor_id'].'">Uredi</a> ';
+            echo '<a href="actor_delete.php?id='.$row['actor_id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
+            echo '<br/>';
+        }
         echo '</div>';
     }
 ?>
-<a href="actor_add.php" class="btn btn-primary">Dodaj igralca</a>
+
+<?php 
+    if(isAdmin()){
+        echo '<a href="actor_add.php" class="btn btn-primary">Dodaj igralca</a>';
+    }
+?>
+
 </div>
 
 <?php

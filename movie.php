@@ -14,17 +14,70 @@
 
 <div class="filmi">
     <div class="film-slike">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/7124A8OOL6L._AC_SL1001_.jpg" alt="slika" /><br />
-        <form action="movie_image_upload.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $movie['movie_id'];?>" /><br />
-            <input type="text" name="title" placeholder="Vnesi naslov slike" class="form-control" /><br />
-            <select name="type" class="form-control">
-                <option value="img">Slika</option>
-                <option value="video">Video</option>
-            </select><br />
-            <input type="file" name="file" placeholder="Naloži sliko filma" class="form-control" /><br />
-            <input type="submit" value="Naloži" />
-        </form>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+            <?php 
+                $query = "SELECT * FROM multimedia WHERE movie_id = ? AND type='img'";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([$id]);
+                $numImages = $stmt->rowCount(); //število slik, v bazi za ta film
+
+                for($i = 0; $i < $numImages; $i++) {
+                    if ($i == 0) {
+                        echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$i.'" class="active"></li>';
+                    }
+                    else {
+                        echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$i.'"></li>';
+                    }
+                }
+            ?>
+                
+            </ol>
+            <div class="carousel-inner">
+            <?php
+                $i=0;
+                while ($row = $stmt->fetch()) {
+                    if ($i == 0) {
+                        echo '<div class="carousel-item active">';
+                    }
+                    else {
+                        echo '<div class="carousel-item">';
+                    }                
+                    echo '<img class="d-block w-100" src="'.$row['url'].'" alt="First slide">';
+                    echo '<div class="carousel-caption d-none d-md-block">';
+                    echo '<p>'.$row['title'].'</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    $i++;
+                }
+            ?>
+                
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <?php 
+            if(isAdmin()){
+        ?>
+            <form action="movie_image_upload.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?php echo $movie['movie_id'];?>" /><br />
+                <input type="text" name="title" placeholder="Vnesi naslov slike" class="form-control" /><br />
+                <select name="type" class="form-control">
+                    <option value="img">Slika</option>
+                    <option value="video">Video</option>
+                </select><br />
+                <input type="file" name="file" placeholder="Naloži sliko filma" class="form-control" /><br />
+                <input type="submit" value="Naloži" />
+            </form>
+        <?php 
+            }
+        ?>
     </div>
     <div class="film-podatki">
         <div class="naslov"><?php echo $movie['title']; ?></div>
@@ -36,10 +89,18 @@
     </div>
 </div>
 
+<?php 
+    if(isAdmin()){
+?>
+
 <h2>Igralska zasedba</h2></br>
 <a href="movie_actors.php?id=<?php echo $id; ?>" class="btn btn-primary"> Igralci v tem filmu</a>
 </br>
 </br>
+
+<?php 
+    }
+?>
 
 <div class="igralci">
     <div class="igralec">

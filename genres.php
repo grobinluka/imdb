@@ -1,5 +1,8 @@
 <?php
     include_once "header.php";
+
+    adminOnly();
+
     include_once "db.php";
 ?>
 <br/>

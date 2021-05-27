@@ -20,45 +20,30 @@ if(!isset($_SESSION['user_id'])&& (!in_array($_SERVER['REQUEST_URI'], $allowed))
 }
 
 
-
 /**
- * 
- * Pretvori minute dolžine filma v obliko ure in minute
+ * Funkcija vrača ali je trenutno prijavljeni uporabnik administrator
  */
-function fromDateToString($minutes){
-    $minutes = (int) $minutes;
 
-    if(empty($minutes)){
-        return;
+ function isAdmin(){
+    if(isset($_SESSION['admin'])){
+        return $_SESSION['admin'];
     }
     else{
-        $hour = floor($minutes / 60);
-        $minutes = $minutes - ($hour * 60);
-        return "$hour h $minutes min";
+        return 0;
     }
+    
+ }
 
-}
 
-/**
- * Vrača vse žanre, ki jih ima film
+ /**
+ * Funkcija preverja omogoča dostop do strani le administratorjem, ostale preusmeri na index
  */
 
-function getGenres($movie_id){
-    require 'db.php';
-
-    $query = "SELECT g.* FROM genres g INNER JOIN genres_movies gm ON gm.genre_id = g.genre_id WHERE gm.movie_id=? ORDER BY g.genre";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$movie_id]);
-
-    $return = "";
-
-    while($row = $stmt->fetch()){
-        if(!empty($return)){
-            $return = $return.', ';
-        }
-        $return = $return.$row['genre'];
+ function adminOnly(){
+    if((!isset($_SESSION['admin'])) || (!isAdmin())) {
+        header("Location: index.php"); die();
     }
-    return $return;
-}
+ }
+
 
 ?>

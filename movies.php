@@ -19,18 +19,25 @@
         echo '<br/>';
         echo '<span>'.$row['release_year'].'</span>';
         echo '<br/>';
-        echo '<a href="movie_edit.php?id='.$row['movie_id'].'">Uredi</a> ';
-        echo '<a href="movie_delete.php?id='.$row['movie_id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
-        echo '<br/>';
+
+        if(isAdmin()){
+            echo '<a href="movie_edit.php?id='.$row['movie_id'].'">Uredi</a> ';
+            echo '<a href="movie_delete.php?id='.$row['movie_id'].'" onclick="return confirm(\'Prepričani?\')">Izbriši</a>';
+            echo '<br/>';
+        }
         echo '</div>';
     }
 ?>
 </div>
+
+<?php 
+    if(isAdmin()){
+?>
+
 <a href="movie_add.php" class="btn btn-primary">Dodaj film</a>
 
-
 <?php
-
+    }
     include_once "footer.php";
 
 ?>

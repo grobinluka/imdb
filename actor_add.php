@@ -1,5 +1,8 @@
 <?php
     include_once "header.php";
+        
+    adminOnly();
+
 ?>
 
 <h2>Dodaj igralca</h2>

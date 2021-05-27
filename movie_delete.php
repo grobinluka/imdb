@@ -1,6 +1,9 @@
 <?php
 
 include_once "session.php";
+
+adminOnly();
+
 include_once "db.php";
 
 $id = (int) $_GET['id'];

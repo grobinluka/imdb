@@ -1,27 +1,30 @@
 <?php
 
-include_once "header.php";
-include_once "db.php";
-include_once "functions.php";
+    include_once "header.php";
 
-$movie_id = (int) $_GET['id'];
+    adminOnly();
 
-$movie = getMovieData($movie_id);
+    include_once "db.php";
+    include_once "functions.php";
 
-$query = "SELECT * FROM roles WHERE movie_id = ?";
-$stmt = $pdo->prepare($query);
-$stmt->execute([$movie_id]);
+    $movie_id = (int) $_GET['id'];
 
-$roles = array();
+    $movie = getMovieData($movie_id);
 
-$actors = array();
-while($row = $stmt->fetch()){
-    $actor_id = $row['actor_id'];
-    $actors[] = $actor_id;
+    $query = "SELECT * FROM roles WHERE movie_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$movie_id]);
 
-    //za igralca si zapomnim vlogo
-    $roles[$actor_id] = $row['role'];
-}
+    $roles = array();
+
+    $actors = array();
+    while($row = $stmt->fetch()){
+        $actor_id = $row['actor_id'];
+        $actors[] = $actor_id;
+
+        //za igralca si zapomnim vlogo
+        $roles[$actor_id] = $row['role'];
+    }
 
 
 ?>

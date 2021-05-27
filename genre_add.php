@@ -1,5 +1,6 @@
 <?php
     include_once "header.php";
+    adminOnly();
 ?>
 
 <h2>Dodaj žanr</h2>

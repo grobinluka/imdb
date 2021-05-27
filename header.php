@@ -34,15 +34,29 @@
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>
-            <a class="btn btn-sm btn-outline-secondary" href="user_add.php">Registracija</a>
-            <a class="btn btn-sm btn-outline-secondary" href="login.php">Prijava</a>
+            <?php 
+            
+              if(!isset($_SESSION['user_id'])){
+                echo '<a class="btn btn-sm btn-outline-secondary" href="user_add.php">Registracija</a>';
+                echo '<a class="btn btn-sm btn-outline-secondary" href="login.php">Prijava</a>';
+              }
+              else{
+                echo '<a class="btn btn-sm btn-outline-secondary" href="logout.php">Odjava</a>';
+              }
+
+            ?>
+            
           </div>
         </div>
       </header>
 
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex">
-          <a class="p-2 text-muted" href="genres.php">Žanri</a>
+          <?php
+            if(isAdmin()){
+              echo '<a class="p-2 text-muted" href="genres.php">Žanri</a>';
+            }
+          ?>
           <a class="p-2 text-muted" href="actors.php">Igralci</a>
           <a class="p-2 text-muted" href="movies.php">Filmi</a>
         </nav>
