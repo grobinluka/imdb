@@ -1,4 +1,9 @@
-<?php include_once "session.php"; ?>
+<?php 
+
+  include_once "session.php";
+  include_once "functions.php";
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -16,6 +21,7 @@
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/blog.css" rel="stylesheet">
   </head>
 
@@ -41,6 +47,7 @@
                 echo '<a class="btn btn-sm btn-outline-secondary" href="login.php">Prijava</a>';
               }
               else{
+                //echo '<div>'.getUserName($_SESSION['user_id']).'&nbsp;</div>';
                 echo '<a class="btn btn-sm btn-outline-secondary" href="logout.php">Odjava</a>';
               }
 
@@ -56,9 +63,12 @@
             if(isAdmin()){
               echo '<a class="p-2 text-muted" href="genres.php">Žanri</a>';
             }
+
+            if(isset($_SESSION['user_id'])){
+              echo '<a class="p-2 text-muted" href="actors.php">Igralci</a>';
+              echo '<a class="p-2 text-muted" href="movies.php">Filmi</a>';
+            }
           ?>
-          <a class="p-2 text-muted" href="actors.php">Igralci</a>
-          <a class="p-2 text-muted" href="movies.php">Filmi</a>
         </nav>
       </div>
 
@@ -66,5 +76,18 @@
     </div>
 
     <main role="main" class="container">
+        <div class="sporocila">
+          <?php
+          
+            if(isset($_SESSION['msg'])){
+              echo '<span class="'.$_SESSION['msg_type'].'">'.$_SESSION['msg'].'</span>';
+
+              //brisanje sporočila
+              unset($_SESSION['msg']);
+            }
+
+          ?>
+        </div>
       <div class="row">
         <div class="col-md-8 blog-main">
+          

@@ -45,5 +45,15 @@ if(!isset($_SESSION['user_id'])&& (!in_array($_SERVER['REQUEST_URI'], $allowed))
     }
  }
 
+  /**
+ * Funkcija nam dodaja sporočilo v sistem
+ * content: besedilo
+ * type: napaka, uspeh
+ */
+ function msg($content, $type = 'uspeh'){
+    $_SESSION['msg'] = $content;
+    $_SESSION['msg_type'] = $type;
+ }
+
 
 ?>

@@ -61,7 +61,6 @@ function getActorAvatar($actor_id){
 }
 
 /**
- * 
  * Pretvori minute dolžine filma v obliko ure in minute
  */
 function fromDateToString($minutes){
@@ -98,6 +97,67 @@ function getGenres($movie_id){
         $return = $return.$row['genre'];
     }
     return $return;
+}
+
+
+function getMovieRate($movie_id){
+    require 'db.php';
+
+    $query = "SELECT * FROM movies WHERE movie_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$movie_id]);
+
+    $movie = $stmt->fetch();
+
+    $result = 'N/A';
+
+    if(!empty($movie['rating'])){
+        $result = $movie['rating'];
+    }
+
+    return $result;
+}
+
+
+function canUserRateMovie($user_id, $movie_id){
+    require 'db.php';
+
+    $query = "SELECT * FROM ratings WHERE user_id = ? AND movie_id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$user_id, $movie_id]);
+
+    if($stmt->rowCount() == 0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+
+}
+
+function canCurrentUserDeleteComment($comment_id){
+
+    require 'db.php';
+    
+    $user_id = $_SESSION['user_id'];
+
+    if(isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)){
+        return 1;
+    }
+    else{
+        $query = "SELECT * FROM comments WHERE comment_id = ? AND user_id = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$comment_id, $user_id]);
+
+        if($stmt->rowCount() == 0){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
+    
+
 }
 
 ?>

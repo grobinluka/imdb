@@ -84,7 +84,30 @@
         <div class="zanri"><?php echo getGenres($movie['movie_id']); ?></div>
         <div class="dolzina"><?php echo fromDateToString($movie['duration']); ?></div>
         <div class="leto"> <?php echo $movie['release_year']; ?></div>
-        <div class="ocena">* * * * *</div>
+        <div class="ocena">
+            Ocena: <span><?php echo getMovieRate($movie['movie_id']) ?></span>
+
+            <?php if(canUserRateMovie($_SESSION['user_id'], $id)){ ?>
+            
+            <div class="stars">
+                <form action="movie_rate.php" method="post">
+                    <input type="hidden" name="movie_id" value="<?php echo $movie['movie_id'];?>" />
+                    <input class="star star-5" id="star-5" type="radio" name="star" value="5"/> 
+                    <label class="star star-5" for="star-5"></label> 
+                    <input class="star star-4" id="star-4" type="radio" name="star" value="4" /> 
+                    <label class="star star-4" for="star-4"></label> 
+                    <input class="star star-3" id="star-3" type="radio" name="star" value="3" /> 
+                    <label class="star star-3" for="star-3"></label> 
+                    <input class="star star-2" id="star-2" type="radio" name="star" value="2" /> 
+                    <label class="star star-2" for="star-2"></label> 
+                    <input class="star star-1" id="star-1" type="radio" name="star" value="1" /> 
+                    <label class="star star-1" for="star-1"></label> 
+                    <input type="submit" value="Glasuj" class="btn"/>
+                </form>
+            </div>
+            <?php } ?>
+        </div>
+        <br />
         <div class="opis"><?php echo $movie['description']; ?></div>
     </div>
 </div>
@@ -158,6 +181,13 @@
             <div class="row">
                 <div class="col-8">
                     <div class="card post">
+                        <?php 
+                            if(canCurrentUserDeleteComment($row['comment_id'])){
+                                echo '<div class="brisanje_komentarja">';
+                                echo '<a href="comment_delete.php?id='.$row['comment_id'].'" onclick="return confirm (\Prepričani?\)" class="btn btn-danger btn-delete-comment">x</a>';
+                                echo '</div>';
+                            }
+                        ?>
                         <div class="post-heading">
                             <div class="float-left image">
                                 <img src="<?php echo getUserAvatar($row['user_id']); ?>" alt="actor_image" class="avatar"/>
