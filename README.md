@@ -1,2 +1,1 @@
-# imdb
 # SCHOOL PROJECT
